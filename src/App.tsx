@@ -1,25 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// src/App.tsx
+import React, { useState } from "react";
+import LoginPage from "./components/LoginPage";
+import UploadPage from "./components/UploadPage";
+import RegisterPage from "./components/RegisterPage";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [idToken, setIdToken] = useState<string | null>(null);
+  const [userSub, setUserSub] = useState<string | null>(null);
+  const [view, setView] = useState<"login" | "register" | "upload">("login");
+
+  if (idToken && userSub)
+    return <UploadPage idToken={idToken} userSub={userSub} />;
+
+  return view === "register" ? (
+    <RegisterPage onSwitchToLogin={() => setView("login")} />
+  ) : (
+    <LoginPage
+      onLoginSuccess={(token, sub) => {
+        setIdToken(token);
+        setUserSub(sub);
+        setView("upload");
+      }}
+      onSwitchToRegister={() => setView("register")}
+    />
   );
 }
 
