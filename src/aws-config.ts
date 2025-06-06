@@ -1,9 +1,9 @@
 export const REGION = "us-east-1";
 
 export const COGNITO = {
-  USER_POOL_ID: "us-east-1_evpimTPFg",
-  CLIENT_ID: "54phf8klm0k68tcrttg2h46nj6",
-  IDENTITY_POOL_ID: "us-east-1:e08bc740-a927-4ab5-83f3-642df1f64a1b",
+  USER_POOL_ID: "us-east-1_1ynAb3mAr",
+  CLIENT_ID: "4pmb1cqdel6hb69g29ocm270c8",
+  IDENTITY_POOL_ID: "us-east-1:7bc7684f-600e-446e-9387-2a59dbaab594",
 };
 
-export const S3_BUCKET = "xyz-logistics-uploads-dev";
+export const S3_BUCKET = "xyz-logistics-uploads-bucket-dev";

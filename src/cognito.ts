@@ -39,3 +39,20 @@ export function getCognitoCredentials(idToken: string) {
     client: new CognitoIdentityClient({ region: REGION }),
   });
 }
+
+export async function getCognitoCredentialsWithId(idToken: string) {
+  const provider = fromCognitoIdentityPool({
+    identityPoolId: COGNITO.IDENTITY_POOL_ID,
+    logins: {
+      [`cognito-idp.${REGION}.amazonaws.com/${COGNITO.USER_POOL_ID}`]: idToken,
+    },
+    client: new CognitoIdentityClient({ region: REGION }),
+  });
+
+  const credentials = await provider(); // resolves to { accessKeyId, secretAccessKey, sessionToken, identityId }
+
+  return {
+    credentials,
+    identityId: (credentials as any).identityId, // cast to access internal field
+  };
+}
